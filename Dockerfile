@@ -4,10 +4,10 @@ COPY package.json yarn.lock /app/
 RUN yarn install --production
 
 
-FROM node:12-alpine as runner
+FROM node:12-alpine as production
 COPY --from=build /app/node_modules /app/node_modules
 COPY . .
-ENTRYPOINT ["node", "src/index.js"]
+CMD ["node", "src/index.js"]
 EXPOSE 3000
 
 FROM node:12-alpine as dev

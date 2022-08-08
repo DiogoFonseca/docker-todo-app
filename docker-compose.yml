@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    ports:
+      - "3000:3000"
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=secret
+      - MYSQL_DB=todos
+    volumes:
+      - ./spec:/app/spec
+      - ./src:/app/src
+    depends_on:
+      - mysql
+    networks:
+      - todo-nw
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=todos
+    networks:
+      - todo-nw
+volumes:
+  todo-mysql-data:
+networks:
+  todo-nw:

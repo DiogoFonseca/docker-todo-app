@@ -44,7 +44,7 @@ jobs:
         file: Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tag: ${{ secrets.DOCKERHUB_USERNAME }}/todo-app:${{ env.RELEASE_VERSION }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-app:${{ env.RELEASE_VERSION }}
         cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/todo-app:buildcache
         cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/capacitacaofront:buildcache,mode=max
 
